@@ -22,19 +22,37 @@
   networking.networkmanager.enable = true;
    networking.nameservers = [ "192.168.0.1" ];
 
+#Fonts
+  fonts = {
+    enableFontDir = true;
+    enableGhostscriptFonts = true;
+    fonts = with pkgs; [
+      corefonts  # Micrsoft free fonts
+      fira # monospaced
+      inconsolata  # monospaced
+      powerline-fonts
+      ubuntu_font_family  # Ubuntu fonts
+      unifont # some international languages
+    ];
+};
   # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
+   i18n = {
+     consoleFont = "Lat2-Terminus16";
+     consoleKeyMap = "us";
+     defaultLocale = "en_US.UTF-8";
+   };
+ nixpkgs.config = {
+    allowUnfree = true; # Allow "unfree" packages.
 
+    firefox.enableAdobeFlash = true;
+    chromium.enablePepperFlash = true;
+};
   # Set your time zone.
    time.timeZone = "Asia/Kolkata";
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-   environment.systemPackages = with pkgs; [ bash mutt firefox git gnupg wget vim curl lynx ];	
+   environment.systemPackages = with pkgs; [ bash mutt firefox chromium git gnupg wget vim curl lynx ];	
   #   wget vim
   # ];
 
@@ -72,6 +90,9 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
+  #
+  # # battery management
+   services.tlp.enable = true;
 
   # Enable the X11 windowing system.
    services.xserver.enable = true;

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+source /home/bhaskar/spinner.sh
+
+printf "\n\n Verifying the store ....have patience ...\n\n"
+
+(nix-store --verify --check-contents)&
+
+spinner "$!" "Verifying..."
+
+
+if [[ $? != 0 ]]; then
+ 
+ printf "Looks not alright ... Fix it ...\n\n"
+
+ (nix-store --verify --check-contents --repair)&
+ spinner "$!" "Repairing the store.."
+fi 
+

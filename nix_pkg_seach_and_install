@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+source /home/bhaskar/colors.sh
+NOCOLOR="\033[m"
+pkg=$1
+
+if [[ "$1" == "" ]]; then
+printf "${Bright}${Red} Please put the package name as argument.${NOCOLOR}\n\n"
+exit 1
+fi
+
+nox $pkg 
+
+exit 0

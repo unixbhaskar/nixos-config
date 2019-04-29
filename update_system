@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+source /home/bhaskar/colors.sh
+
+NOCOLOR="\033[0m"
+
+printf "\n\n\n${Reverse}${Bright}${Green} Updating and Upgrading the system ${NOCOLOR}  ...\n\n\n"
+
+printf "Hostname: %s\nDate    : %s\nUptime  :%s\n\n"  "$(hostname -s)" "$(date)" "$(uptime)"
+
+nix-channel --update
+
+
+
+printf "\n\n\n${Bright}${Blue} Updating/Upgrading the environment ${NOCOLOR} .....\n\n\n"
+
+nix-env -u '*'
+
+
+
+printf "\n\n\n ${Bright}${Yellow}Okay...lets rebuild the system... and switch to it! ${NOCOLOR}\n\n\n"
+
+nixos-rebuild switch  --upgrade
+
+
+printf "\n\n\n\n ${Bright}${Cyan} Cleaning out the garbages from the system ${NOCOLOR} ....\n\n\n"
+
+nix-collect-garbage -d
+
+exit 0

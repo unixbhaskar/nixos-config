@@ -1,0 +1,6 @@
+#!
+
+printf " Checking package dependency ....wait ...\n\n"
+
+nix-store --query --requisites $(readlink -f /run/current-system)
+

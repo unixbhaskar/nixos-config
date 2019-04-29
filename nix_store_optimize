@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source /home/bhaskar/spinner.sh
+
+printf " \n\n This will optimize the store .. might take long time ...have patience...\n\n"
+
+(nix-store --optimize)&
+
+spinner "$!" "Optimizing......."
+
+exit 0
+
+
